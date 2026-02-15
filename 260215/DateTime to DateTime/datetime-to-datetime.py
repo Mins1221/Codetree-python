@@ -4,7 +4,8 @@ a, b, c = map(int, input().split())
 day, hour, mins = 11, 11, 11
 time = 0
 
-
+if day > a and hour > b and mins > c:
+    print(-1)
 
 while True :
     if day == a and hour == b and mins ==c:
