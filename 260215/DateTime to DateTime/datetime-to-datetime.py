@@ -8,8 +8,8 @@ time = 0
 
 while True :
     if day > a and hour > b and mins > c:
-    print(-1)
-    
+        print(-1)
+
     if day == a and hour == b and mins ==c:
         break
     time += 1
