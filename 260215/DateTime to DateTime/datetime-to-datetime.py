@@ -7,7 +7,13 @@ time = 0
 
 
 while True :
-    if day >= a or hour >= b or mins >= c:
+    if day >= a
+        print(-1)
+        break
+    if hour >= b
+        print(-1)
+        break 
+    if mins >= c:
         print(-1)
         break
 
