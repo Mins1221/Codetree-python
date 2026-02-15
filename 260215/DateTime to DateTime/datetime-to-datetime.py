@@ -7,9 +7,9 @@ time = 0
 
 
 while True :
-    if (a,b,c) < (11,11,11)
+    if (a,b,c) < (11,11,11) :
         print(-1)
-        
+
 
     if day == a and hour == b and mins ==c:
         break
