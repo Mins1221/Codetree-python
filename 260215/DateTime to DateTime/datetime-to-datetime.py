@@ -17,8 +17,8 @@ while True :
     if mins == 60:
         hour +=1
         mins =0
-        if hour ==24:
-            day +=1
-            hour =0
+    if hour ==24:
+        day +=1
+        hour =0
 
 print(time)
