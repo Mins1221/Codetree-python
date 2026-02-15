@@ -4,23 +4,21 @@ a, b, c = map(int, input().split())
 day, hour, mins = 11, 11, 11
 time = 0
 
-
-
-while True :
-    if (a,b,c) < (11,11,11) :
+if (a,b,c) < (11,11,11) :
         print(-1)
-        break
+else:
 
+    while True :
 
-    if day == a and hour == b and mins ==c:
-        break
-    time += 1
-    mins +=1
-    if mins == 60:
-        hour +=1
-        mins =0
-        if hour ==24:
-            day +=1
-            hour =0
+        if day == a and hour == b and mins ==c:
+            break
+        time += 1
+        mins +=1
+        if mins == 60:
+            hour +=1
+            mins =0
+            if hour ==24:
+                day +=1
+                hour =0
 
-print(time)
+    print(time)
