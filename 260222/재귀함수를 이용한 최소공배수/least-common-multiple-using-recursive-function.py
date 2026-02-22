@@ -2,13 +2,19 @@ n = int(input())
 arr = list(map(int, input().split()))
 
 # Please write your code here.
-def lcm_list(arr, multiple=1):
-    # 모든 수로 나누어 떨어지면 최소공배수
-    if all(multiple % n == 0 for n in arr):
-        return multiple
-    return lcm_list(arr, multiple + 1)
+def gcd(a, b):          # 최대공약수 (재귀)
+    if b == 0:
+        return a
+    return gcd(b, a % b)
 
-result = lcm_list(arr)
-print(result)
+def lcm(a, b):          # 최소공배수
+    return a * b // gcd(a, b)
+
+def lcm_list(arr, index=0):   # 리스트 전체 LCM (재귀)
+    if index == len(arr) - 1:
+        return arr[index]
+    return lcm(arr[index], lcm_list(arr, index + 1))
+
+print(lcm_list(arr, index=0))
 
 
