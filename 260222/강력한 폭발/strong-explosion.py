@@ -20,9 +20,15 @@ def find(idx):
     (r-2,c) (r-1,c) (r,c) (r+1,c) (r+2,c)
 def bomb1(r,c):
     board[r-2][c] =1
-    board[r-2][c] =1
+    board[r-1][c] =1
+    board[r][c] =1
+    board[r+1][c] =1
+    board[r+2][c] =1
 
-폭탄2 (상하좌우 1칸)
+def bomb2(r,c):
+    board[r-2][c] =1
+    board[r-2][c] =1
+    board[r-2][c] =1
     (r,c) (r-1,c) (r+1,c) (r,c-1) (r,c+1)
 
 폭탄3 (대각선 1칸)
