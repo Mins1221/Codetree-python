@@ -13,18 +13,14 @@ for r in range(n):
 max_count =0
 
 def find(idx):
-    idx = 0
     if idx == len(bombs):
         return max_count
 
     폭탄1 (상하 2칸)
-    if idx < len(bombs):
-        bombs.append(r-2,c)
-        bombs.append(r-1,c)
-        bombs.append(r-1,c)
-        bombs.append(r-1,c)
-        bombs.append(r-1,c)
     (r-2,c) (r-1,c) (r,c) (r+1,c) (r+2,c)
+def bomb1(r,c):
+    board[r-2][c] =1
+    board[r-2][c] =1
 
 폭탄2 (상하좌우 1칸)
     (r,c) (r-1,c) (r+1,c) (r,c-1) (r,c+1)
