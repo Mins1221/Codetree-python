@@ -7,7 +7,7 @@ def print_answer():
     print()
 
 def c(num):
-    if num == N+1:
+    if num == N:
         print_answer()
         return
 
@@ -18,5 +18,5 @@ def c(num):
 
     return
 
-c(1)
+c(0)
 print_answer()
