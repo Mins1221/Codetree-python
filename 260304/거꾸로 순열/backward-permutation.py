@@ -1,7 +1,6 @@
 n = int(input())
 
 # Please write your code here.
-n = 3
 visited = [False] * (n+1)
 answer = []
 
