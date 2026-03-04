@@ -5,10 +5,10 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 visited = [False] *n
 min_val = 0
 
-def solve(col):
+def solve(col,curr_min):
     global min_val
     if col == n :
-        min_val = max(col,min_val)
+        min_val = max(min_val,curr_min)
         return
 
     for row in range(n):
@@ -16,8 +16,8 @@ def solve(col):
             continue
         
         visited[row] = True
-        solve(col+1)
+        solve(col+1, min(curr_min, grid[row][col]))
         visited[row] = False
 
-solve(0)
+solve(0,1370345)
 print(min_val)
