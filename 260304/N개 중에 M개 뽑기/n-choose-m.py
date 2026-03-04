@@ -15,5 +15,3 @@ def choose(curr_num, cnt):
     return 
 
 choose(1,0)
-
-
