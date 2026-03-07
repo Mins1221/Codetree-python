@@ -34,7 +34,7 @@ def can_go(x,y):
         return False
     if visited[x][y] or grid[x][y] ==0:
         return False
-    if visited[y][x] == 1:
+    if visited[x][y] == 1:
         return
     return True
 
