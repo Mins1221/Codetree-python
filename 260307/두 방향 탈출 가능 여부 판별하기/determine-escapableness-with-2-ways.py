@@ -23,6 +23,8 @@ def dfs(x,y):
         new_x, new_y = x+dx, y+ dy
 
         if can_go(new_x,new_y):
+            if visited[new_y][new_x] == 1:
+                return
             dfs(new_x,new_y)
 
 def in_range(x,y):
@@ -35,6 +37,7 @@ def can_go(x,y):
     if visited[x][y] or grid[x][y] ==0:
         return False
     return True
+
 
 
 dfs(0,0)
