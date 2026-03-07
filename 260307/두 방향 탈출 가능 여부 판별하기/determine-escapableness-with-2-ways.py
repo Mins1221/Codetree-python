@@ -2,8 +2,8 @@ n, m = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0] * m for _ in range(n)]  # 이 줄 추가!
 order = 0
+cnt =0
 answer = [[0] * m for _ in range(n)]   # answer도 선언 필요!
-cnt = 0
 # Please write your code here.
 def dfs(x,y):
     global order
@@ -18,7 +18,7 @@ def dfs(x,y):
         cnt += 1
         visited[x][y] = 0      # 복원
         return
-
+        
     for dx,dy in zip(dxs,dys):
         new_x, new_y = x+dx, y+ dy
 
