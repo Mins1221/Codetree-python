@@ -1,12 +1,9 @@
 n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0] * n for _ in range(n)]  
-order = 0
 cnt =0
-answer = [[0] * n for _ in range(n)] 
 # Please write your code here.
 def dfs(x,y):
-    global order
     global cnt
     dxs,dys = [1, -1, 0, 0], [0, 0, 1, -1] # 상,하,좌,우 할 수 있게 코드 수정
 
@@ -14,8 +11,6 @@ def dfs(x,y):
         new_x, new_y = x+dx, y+ dy
 
         if can_go(new_x,new_y):
-            answer[new_x][new_y]
-            order += 1
             visited[new_x][new_y] =1
             cnt +=1
             dfs(new_x, new_y)
