@@ -2,7 +2,7 @@ n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0] * n for _ in range(n)]  
 order = 0
-cnt =1
+cnt =0
 answer = [[0] * n for _ in range(n)] 
 # Please write your code here.
 def dfs(x,y):
@@ -39,11 +39,12 @@ villages =[]
 for i in range(n):
     for j in range(n):
         if grid[i][j] ==1 and visited[i][j] ==0 :      # 사람이고 미방문이면
-            cnt = 0
+            cnt = 1
+            visited[i][j] = 1 
             dfs(i,j)
             villages.append(cnt)
 
 
-dfs(0,0)
+
 print(len(villages))
 print(*sorted(villages), sep='\n')
