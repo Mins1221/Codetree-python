@@ -36,4 +36,6 @@ def push(x,y,s):
 
 push(0,0,0)
 bfs()
+if a[0][0] == 1:  # 시작점 체크 추가
+    push(0, 0, 0)
 print(step[n-1][m-1])
