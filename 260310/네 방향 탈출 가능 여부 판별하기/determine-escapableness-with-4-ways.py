@@ -10,9 +10,9 @@ cnt = 0
 # Please write your code here.
 def bfs():
     global cnt
-    dxs = [1,0]
+    dxs = [1,-1,0,0]
 
-    dys = [0,1]
+    dys = [0,0,1,-1]
 
     while q:
         x,y = q.popleft()
@@ -46,7 +46,8 @@ def push(x,y):
 
 push(0,0)
 bfs()
-
+if visited[n-1][m-1]:
+    cnt =1
 print(cnt)
 
 
