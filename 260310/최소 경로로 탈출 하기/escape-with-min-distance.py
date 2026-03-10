@@ -4,7 +4,7 @@ a = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0] *m for _ in range(n)]
 q = deque()
 cnt = 0
-step = [[0] * m for _ in range(n)] 
+step = [[-1] * m for _ in range(n)] 
 
 # Please write your code here.
 def bfs():
