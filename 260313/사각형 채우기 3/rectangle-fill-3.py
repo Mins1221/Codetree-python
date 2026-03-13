@@ -9,7 +9,7 @@ dp[2] = 7
 dp[3] = 22
 
 for i in range(4,n+1):
-    dp[i] = (2*dp[i-1] + 4*dp[i-1]) % mod
+    dp[i] = (3*dp[i-1]+dp[i-2]-dp[i-3]) % mod
 
 
 print(dp[n])
