@@ -4,6 +4,7 @@ n = int(input())
 mod = 1000000007
 max_num = 1000
 dp = [0] * max_num
+dp[0] = 1
 dp[1] = 2
 dp[2] = 7
 dp[3] = 22
