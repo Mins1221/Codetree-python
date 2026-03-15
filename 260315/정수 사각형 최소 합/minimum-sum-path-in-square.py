@@ -10,18 +10,19 @@ dp = [
 def initialze():
     dp[0][n-1] = grid[0][n-1]
 
-    for i in range(1,n): #행
+    for i in range(1,n):
         dp[i][n-1] = dp[i-1][n-1] + grid[i][n-1]
 
-    for i in reversed(range(n-1)): #열 
+    for i in reversed(range(n-1)):   
         dp[0][i] = dp[0][i+1] + grid[0][i]
 
 initialze()
 
 for i in range(1,n):
-    for j in reversed(range(n-1)):
-        dp[i][j] = min(dp[i-1][j], dp[i][j+1]) + grid[i][j]
+    for j in reversed(range(n-1)):  
+        dp[i][j] = min(dp[i-1][j] + grid[i][j], dp[i][j+1]+ grid[i][j])
 
 
 
 print(dp[n-1][0])
+
