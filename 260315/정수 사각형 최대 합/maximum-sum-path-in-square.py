@@ -24,4 +24,4 @@ for i in range(1,n):
 
 
 
-print(dp[i][j])
+print(dp[n-1][n-1])
