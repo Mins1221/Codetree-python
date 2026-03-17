@@ -2,7 +2,7 @@ n = int(input())
 A = list(map(int, input().split()))
 
 # Please write your code here.
-min_sum = 10000
+min_sum = 100000
 for i in range(n):
     sum_diff = 0
     for j in range(n):
