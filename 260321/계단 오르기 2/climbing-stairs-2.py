@@ -10,7 +10,7 @@ def initialize():
     dp[0][0] = 0
 initialize()
 
-for i in range(2,n+1):
+for i in range(1,n+1):
     for j in range(0,4):
         if dp[i-2][j] != INT_MIN:
             dp[i][j] = max(dp[i][j], dp[i-2][j] + arr[i])
