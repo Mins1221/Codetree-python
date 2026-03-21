@@ -7,7 +7,7 @@ def initialize():
     for i in range(n+1):
         for j in range(4):
             dp[i][j] = INT_MIN
-    dp[1][0] = arr[1] 
+    dp[1][0] = arr[0] 
 initialize()
 
 for i in range(2,n+1):
