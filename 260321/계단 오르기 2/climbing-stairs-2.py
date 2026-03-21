@@ -19,6 +19,5 @@ for i in range(2,n+1):
 
 ans = INT_MIN
 for i in range(1,n+1):
-    ans = max(ans,dp[i][j])
-
+    ans = max(dp[n])
 print(ans)
