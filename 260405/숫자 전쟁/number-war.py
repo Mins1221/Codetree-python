@@ -13,7 +13,7 @@ for i in range(n-1, -1, -1):
         elif A[i] < B[j] : 
             dp[i][j] = max(dp[i+1][j+1], dp[i+1][j])
         else :
-            dp[i][j] = dp[i+1][j+1]
+            dp[i][j] = max(dp[i+1][j+1],dp[i][j])
 
 ans = 0
 for i in range(n):
