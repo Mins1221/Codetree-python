@@ -11,7 +11,7 @@ for i in range(n):
             else :
                 dp[i][j] = max(A[i], dp[i-1][j-1]+ A[i])
 
-ans = 0
+ans = -INF
 for i in range(n):
     for j in range(k+1):
         ans = max(ans,dp[i][j])
