@@ -1,5 +1,6 @@
-A = input()
-B = input()
+import sys
+A = sys.stdin.readline().strip()
+B = sys.stdin.readline().strip()
 dp = [[0 for _ in range(len(B)+1)] for _ in range(len(A)+1)]
 
 for i in range(1,len(A)+1):
@@ -23,4 +24,4 @@ while i>0 and j>0:
         j -=1
     
 reverse = ans.reverse()
-print(''.jo)
+print(''.join(ans))
