@@ -1,0 +1,16 @@
+n = int(input())
+a = [[0 for _ in range(4)] for _ in range(1005)]
+for i in range(1,n+1):
+    a[i][1], a[i][2], a[i][3] = map(int,input().split())
+
+dp = [[0 for _ in range(4)] for _ in range(1005)]
+
+for i in range(n):
+    for j in range(1,4):
+        for k in range(1,4):
+            if j != k :
+                dp[i+1][k] = max(dp[i + 1][k] , dp[i][j] + a[1+i][k])
+
+ans = max(dp[n])
+
+print(ans)
