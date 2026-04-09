@@ -11,7 +11,7 @@ for _ in range(n):
         commands.append((cmd, k, v))
         d[k]=v
     else:
-        commands.append((cmd, k,v))
+        commands.append((cmd, k))
     if cmd == "remove":
         d.pop(k)
     if cmd == "find":
