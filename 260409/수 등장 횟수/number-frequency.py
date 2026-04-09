@@ -3,9 +3,15 @@ arr = list(map(int, input().split()))
 nums = list(map(int, input().split()))
 
 # Please write your code here.
-num = {}
+num_index = {}
 for i, elem in enumerate(arr):
-    num[i+1] = elem  
+    num_index[i+1] = elem  
 
-values = list(num.values())
-print(' '.join(str(values.count(x)) for x in nums))
+count_map = {}
+for v in num_index.values():
+    if v in count_map:
+        count_map[v] += 1
+    else:
+        count_map[v] = 1
+
+print(' '.join(str(count_map.get(x, 0)) for x in nums))
