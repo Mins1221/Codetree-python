@@ -9,11 +9,14 @@ d = {}
 for i,elem in enumerate(words):
     d[i+1] = elem
 
+num_to_word = {}
+word_to_num = {}
+for i, elem in enumerate(words):
+    num_to_word[i+1] = elem
+    word_to_num[elem] = i+1
+
 for q in queries:
     if q.isdigit():
-        print(d[int(q)])
+        print(num_to_word[int(q)])
     else:
-        for key, val in d.items():
-            if val == q:
-                print(key)
-                break
+        print(word_to_num[q])
