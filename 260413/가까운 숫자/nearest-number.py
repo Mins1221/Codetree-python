@@ -1,10 +1,11 @@
 from sortedcontainers import SortedSet
+import sys
 n = int(input())
 queries = list(map(int, input().split()))
 s = SortedSet()
 # Please write your code here.
 s.add(0)
-min_value = 1000
+min_value = sys.maxsize
 for i in queries:
     s.add(i)
     idx = s.index(i)
