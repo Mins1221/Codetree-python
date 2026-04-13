@@ -13,5 +13,7 @@ for x in s:
     if idx < len(s):
         diff = s[idx] - x
         answer = min(answer, diff)
-
-print(answer)
+        print(answer) 
+    
+if idx >= len(s):
+    print(-1)
