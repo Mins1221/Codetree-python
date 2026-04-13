@@ -4,6 +4,7 @@ n, m = map(int, input().split())
 arr = [int(input()) for _ in range(n)]
 s = SortedSet()
 answer = 1000
+max_answer = 0 
 # Please write your code here.
 for i in arr:
     s.add(i)
@@ -13,7 +14,7 @@ for x in s:
     if idx < len(s):
         diff = s[idx] - x
         answer = min(answer, diff)
-        print(answer) 
-    
-if idx >= len(s):
-    print(-1)
+    else :
+        max_answer = max(-1,answer)
+print(max_answer)
+
