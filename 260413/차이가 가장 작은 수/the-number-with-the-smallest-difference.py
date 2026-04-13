@@ -3,7 +3,7 @@ from sortedcontainers import SortedSet
 n, m = map(int, input().split())
 arr = [int(input()) for _ in range(n)]
 s = SortedSet()
-answer = 1000
+answer = 0
 max_answer = 0 
 # Please write your code here.
 for i in arr:
