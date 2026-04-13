@@ -1,9 +1,9 @@
 from sortedcontainers import SortedSet
-
+import sys
 n, m = map(int, input().split())
 arr = [int(input()) for _ in range(n)]
 s = SortedSet()
-answer = 1000
+answer = sys.maxsize
 max_answer = 0 
 # Please write your code here.
 for i in arr:
@@ -15,7 +15,7 @@ for x in s:
         diff = s[idx] - x
         answer = min(answer, diff)
     else :
-        if answer == 1000:
+        if answer == sys.maxsize:
             answer = -1
         max_answer = max(-1,answer)
 print(max_answer)
