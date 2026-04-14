@@ -1,29 +1,41 @@
-from sortedcontainers import SortedSet,SortedList
+from sortedcontainers import SortedSet
+
 n, m = map(int, input().split())
 nums = list(map(int, input().split()))
-s = SortedSet()
-# Please write your code here.
-for l in range(n+1):
-    s.add(l)
-runs = SortedList([n+1])
- 
+
+iv_right = {}   # left -> right
+iv_left  = {}   # right -> left
+starts   = SortedSet()   # 구간 왼쪽끝
+by_len   = SortedSet()   # (길이, 왼쪽끝) — 최댓값을 [-1]로 조회
+
+# 초기 구간 [0, n]
+iv_right[0] = n
+iv_left[n]  = 0
+starts.add(0)
+by_len.add((n + 1, 0))
+
 for k in nums:
-    idx = s.index(k)
-    s.remove(k)
-    left_idx = idx - 1
-    left_count = 0
-    while left_idx >= 0 and s[left_idx] == k - 1 - left_count:
-        left_count += 1
-        left_idx -= 1
+    idx = starts.bisect_right(k) - 1
+    l = starts[idx]
+    r = iv_right[l]
 
-    right_idx = idx 
-    right_count = 0
-    while right_idx < len(s) and s[right_idx] == k+1 +right_count: 
-        right_count += 1
-        right_idx += 1 # 초기엔 전체가 연속
+    # 기존 구간 제거
+    del iv_right[l], iv_left[r]
+    starts.remove(l)
+    by_len.remove((r - l + 1, l))
 
-    runs.remove(left_count + right_count + 1)
-    if left_count > 0: runs.add(left_count)
-    if right_count > 0: runs.add(right_count)
-    
-    print(runs[-1])
+    # [l, k-1] 구간 추가
+    if l <= k - 1:
+        iv_right[l]    = k - 1
+        iv_left[k - 1] = l
+        starts.add(l)
+        by_len.add((k - l, l))
+
+    # [k+1, r] 구간 추가
+    if k + 1 <= r:
+        iv_right[k + 1] = r
+        iv_left[r]      = k + 1
+        starts.add(k + 1)
+        by_len.add((r - k, k + 1))
+
+    print(by_len[-1][0] if by_len else 0)
