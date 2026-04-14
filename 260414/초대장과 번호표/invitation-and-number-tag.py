@@ -22,4 +22,4 @@ while True:
         break
 
     
-    print(len(invited))
+print(len(invited))
