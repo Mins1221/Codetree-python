@@ -16,7 +16,6 @@ for k in C:
     for l in D:
         sum2 = -(k + l)
         if sum2 in d1:
-            d1.get(sum2,0) + 1
-            ans +=1
+            ans += d1[sum2]
 
 print(ans)
