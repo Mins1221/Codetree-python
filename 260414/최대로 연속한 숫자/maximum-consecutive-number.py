@@ -1,31 +1,23 @@
 from sortedcontainers import SortedSet
 
 n, m = map(int, input().split())
-nums = list(map(int, input().split()))
+arr = list(map(int, input().split()))
+s_num = SortedSet()
+s_len = SortedSet()
 
-by_left = SortedSet()  # (left, length) — 구간 탐색용
-by_len  = SortedSet()  # (length, left) — 최댓값 조회용
+s_num.add(-1)
+s_num.add(n + 1)
+s_len.add((-(n + 1), -1, n + 1))
 
-def add(l, r):
-    if l > r: return
-    ln = r - l + 1
-    by_left.add((l, ln))
-    by_len.add((ln, l))
+for y in arr:
+    s_num.add(y)
+    
+    idx = s_num.index(y)   # y의 위치
+    x = s_num[idx - 1]     # 왼쪽 이웃
+    z = s_num[idx + 1]     # 오른쪽 이웃
 
-def remove(l, ln):
-    by_left.remove((l, ln))
-    by_len.remove((ln, l))
+    s_len.remove((-(z - x - 1), x, z))
+    s_len.add((-(y - x - 1), x, y))
+    s_len.add((-(z - y - 1), y, z))
 
-add(0, n)
-
-for k in nums:
-    # k를 포함하는 구간 찾기
-    idx = by_left.bisect_right((k, float('inf'))) - 1
-    l, ln = by_left[idx]
-    r = l + ln - 1
-
-    remove(l, ln)
-    add(l, k - 1)
-    add(k + 1, r)
-
-    print(by_len[-1][0] if by_len else 0)
+    print(-s_len[0][0])
