@@ -1,25 +1,30 @@
+from collections import deque
+
 N, G = map(int, input().split())
 
-group = []
-group_size = []
-groups = set()
-for _ in range(G):
+groups = []
+person_to_groups = [[] for _ in range(N + 1)]  
+
+for i in range(G):
     nums = list(map(int, input().split()))
-    group_size.append(nums[0])
-    group.append(nums[1:])
+    members = set(nums[1:])
+    groups.append(members)
+    for p in members:
+        person_to_groups[p].append(i)  
 
-invited = set([1])
+invited = set()
+invited_count = [0] * G 
+queue = deque([1])
+invited.add(1)
 
-while True:
-    changed = False
-    for i in group:
-        notInvited = set(i) - invited
-        if len(notInvited) == 1:
-            invited.add(next(iter(notInvited)))
-            changed = True
-        
-    if not changed :
-        break
+while queue:
+    person = queue.popleft()
+    for gi in person_to_groups[person]:       
+        invited_count[gi] += 1
+        if invited_count[gi] == len(groups[gi]) -1:  
+            for p in groups[gi]:
+                if p not in invited:
+                    invited.add(p)
+                    queue.append(p)            
 
-    
 print(len(invited))
