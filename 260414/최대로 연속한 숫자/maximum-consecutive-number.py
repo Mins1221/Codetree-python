@@ -3,39 +3,29 @@ from sortedcontainers import SortedSet
 n, m = map(int, input().split())
 nums = list(map(int, input().split()))
 
-iv_right = {}   # left -> right
-iv_left  = {}   # right -> left
-starts   = SortedSet()   # 구간 왼쪽끝
-by_len   = SortedSet()   # (길이, 왼쪽끝) — 최댓값을 [-1]로 조회
+by_left = SortedSet()  # (left, length) — 구간 탐색용
+by_len  = SortedSet()  # (length, left) — 최댓값 조회용
 
-# 초기 구간 [0, n]
-iv_right[0] = n
-iv_left[n]  = 0
-starts.add(0)
-by_len.add((n + 1, 0))
+def add(l, r):
+    if l > r: return
+    ln = r - l + 1
+    by_left.add((l, ln))
+    by_len.add((ln, l))
+
+def remove(l, ln):
+    by_left.remove((l, ln))
+    by_len.remove((ln, l))
+
+add(0, n)
 
 for k in nums:
-    idx = starts.bisect_right(k) - 1
-    l = starts[idx]
-    r = iv_right[l]
+    # k를 포함하는 구간 찾기
+    idx = by_left.bisect_right((k, float('inf'))) - 1
+    l, ln = by_left[idx]
+    r = l + ln - 1
 
-    # 기존 구간 제거
-    del iv_right[l], iv_left[r]
-    starts.remove(l)
-    by_len.remove((r - l + 1, l))
-
-    # [l, k-1] 구간 추가
-    if l <= k - 1:
-        iv_right[l]    = k - 1
-        iv_left[k - 1] = l
-        starts.add(l)
-        by_len.add((k - l, l))
-
-    # [k+1, r] 구간 추가
-    if k + 1 <= r:
-        iv_right[k + 1] = r
-        iv_left[r]      = k + 1
-        starts.add(k + 1)
-        by_len.add((r - k, k + 1))
+    remove(l, ln)
+    add(l, k - 1)
+    add(k + 1, r)
 
     print(by_len[-1][0] if by_len else 0)
