@@ -2,12 +2,9 @@ n, k = map(int, input().split())
 arr = list(map(int, input().split()))
 count = 0
 d = dict()
-for elem in arr:
-    
+for i,elem in enumerate(arr):
     if k-elem in d:
-        count += d[k-elem]
-    if elem in d:
-        d[elem]+=1
-    else:
-        d[elem] =1
+        count +=1
+    d[elem] = i+1
+    
 print(count)
