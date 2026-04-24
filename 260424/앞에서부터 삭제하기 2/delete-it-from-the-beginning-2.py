@@ -7,7 +7,7 @@ max_val =0
 pq = []
 
 heapq.heappush(pq,arr[n-1])
-sum_val += arr[n-1]
+sum_val = arr[n-1]
 for i in range(n-2,0,-1):
     heapq.heappush(pq,arr[i])
     sum_val +=arr[i]
