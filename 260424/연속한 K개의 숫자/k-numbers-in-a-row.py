@@ -1,24 +1,25 @@
-def solve():
-    N, K, B = map(int, input().split())
-    missing_nums = set()
-    for _ in range(B):
-        missing_nums.add(int(input()))  # 한 줄에 하나씩 입력
+import sys
+INT_MAX = sys.maxsize
+n, k, b = tuple(map(int, input().split()))
+arr = [0] *(n+1)
+prefix_sum = [0] *(n+1)
 
-    exist = [0] * (N + 1)
-    for i in range(1, N + 1):
-        if i not in missing_nums:
-            exist[i] = 1
+def get_sum(s,e):
+    return prefix_sum[e] - prefix_sum[s-1]
 
-    prefix = [0] * (N + 1)
-    for i in range(1, N + 1):
-        prefix[i] = prefix[i - 1] + exist[i]
+ans = INT_MAX
 
-    min_add = K
-    for l in range(1, N - K + 2):
-        r = l + K - 1
-        present_count = prefix[r] - prefix[l - 1]
-        min_add = min(min_add, K - present_count)
+for _ in range(b):
+    x = int(input())
 
-    print(min(min_add, B))
+    arr[x] = 1
 
-solve()
+prefix_sum[0] = 0
+
+for i in range(1,n+1):
+    prefix_sum[i] = prefix_sum[i-1] + arr[i]
+
+for i in range(1,n-k +2):
+    ans = min(get_sum(i,i+k-1),ans)
+
+print(ans)
