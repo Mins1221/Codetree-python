@@ -11,6 +11,6 @@ for i in range(n):
     prefix_sum[i] = prefix_sum[i-1] + arr[i]
 ans = INT_MAX
 for i in range(1,n-k+2):
-    ans = min(ans,prefix_sum[n-k+1]-prefix_sum[i-1])
+    ans = min(ans,prefix_sum[i+k+1]-prefix_sum[i-1])
 
 print(ans)
