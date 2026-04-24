@@ -5,7 +5,7 @@ d = dict()
 for elem in arr:
     
     if k-elem in d:
-        count +=1
+        count += d[k-elem]
     if elem in d:
         d[elem]+=1
     else:
