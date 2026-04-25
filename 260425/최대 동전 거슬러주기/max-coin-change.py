@@ -9,9 +9,9 @@ for i in range(m+1):
 dp[0] = 0
 for i in range(1,m+1):
     for j in range(1,n+1):
-        if dp[i-coin[j]] == INT_MIN:
-            continue
         if i >= coin[j] :
+            if dp[i-coin[j]] == INT_MIN:
+                continue
             dp[i] = max(dp[i], dp[i-coin[j]]+1)
         
 ans = dp[m]
