@@ -13,7 +13,7 @@ for i in range(1,m+1):
 
 ans = dp[m]
 if ans == INT_MAX:
-$0
+
     ans = -1
 
 print(ans)
