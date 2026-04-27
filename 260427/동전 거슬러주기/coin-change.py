@@ -14,5 +14,5 @@ for i in range(1,m+1):
 
 ans = dp[m]
 if ans ==INT_MAX:
-    print(-1)
+    ans = -1
 print(ans)
