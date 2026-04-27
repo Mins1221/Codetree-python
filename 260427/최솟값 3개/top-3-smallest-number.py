@@ -1,10 +1,11 @@
-from sortedcontainers import SortedSet
+from sortedcontainers import SortedList
 n = int(input())
 
 arr = list(map(int, input().split()))
-s= SortedSet()
+s= SortedList()
 
 for i in arr:
+
     s.add(i)
     if len(s) < 3:
         print(-1)
