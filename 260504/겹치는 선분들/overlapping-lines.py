@@ -1,33 +1,33 @@
-N, K = map(int, input().split())
-M = []
-dir = []
-positions = [0]
-cur = 0 
-for _ in range(N):
-    m, d = input().split()
-    m = int(m)
-    M.append(int(m))
-    dir.append(d)
-for i in range(N): 
-    if dir[i] == 'R':
-        cur += M[i]
-    else:
-        cur -= M[i]
-    positions.append(cur)
-event = {}
-for i in range(N):
-    l  =min(positions[i],positions[i+1])
-    r = max(positions[i],positions[i+1])
-    event[l] = event.get(l,0) + 1
-    event[r] = event.get(r,0) - 1
+n,k = map(int, input().split())
+result = 0
 
-coords = sorted(event.keys())
-result  = 0
-cumsum = 0
-for i in range(len(coords)-1):
-    cumsum += event[coords[i]]
-    length = coords[i+1] - coords[i]
-    if cumsum >= K :
-        result += length
+x =0
+points = []
+for _ in range(n):
+    m, d = tuple(input().split())
+    m = int(m)
+    if d == 'R':
+        points.append((x,x+m))
+        x += m
+    else:
+        points.append((x-m,x))
+        x -= m
+
+positions = []
+
+for x1,x2 in points :
+    positions.append((x1,+1))
+    positions.append((x2,-1))
+
+positions.sort()
+
+sum_val = 0
+for i ,(x,v) in enumerate(positions):
+    if sum_val >= k:
+        pre_x, _ = positions[i-1]
+        result += x - pre_x
+
+    sum_val += v
 
 print(result)
+
