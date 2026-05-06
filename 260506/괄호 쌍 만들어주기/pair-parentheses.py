@@ -16,3 +16,6 @@ for i in range(n-2):
 
 print(ans)
 
+
+
+
