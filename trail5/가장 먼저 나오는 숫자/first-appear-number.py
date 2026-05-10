@@ -18,6 +18,7 @@ def lower_bound(i):
             return min_idx +1
         else:
             return -1
+    return -1
 
 for i in query:
     ans = lower_bound(i) 
