@@ -1,24 +1,18 @@
-import sys
 word, k = input().split()
 k = int(k)
-
-# Please write your code he
-
-n = len(word)
-
-D = dict()
-answer = 0
-string = ""
-for i in range(n):
-    s = word[i]
-
-    if s in D.keys() or len(D.keys()) < k:
-        string = string + s
+left = 0 
+max_len = 0
+window = dict()
+for right in range(len(word)):
+    if word[right] in window:
+        window[word[right]] += 1
     else:
-        min_key = min(D, key = D.get)
-        string = word[D[min_key]+1:i] + s
-        D.pop(min_key, None)
-    D[s] = i
-    answer = max(answer, len(string))
-print(answer)
-
+        window[word[right]] = 1        
+        
+    while len(window) > k:
+        window[word[left]] -= 1
+        if window[word[left]] == 0:
+            del window[word[left]]
+        left += 1
+    max_len = max(right - left + 1, max_len)
+print(max_len)
