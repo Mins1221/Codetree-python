@@ -7,8 +7,8 @@ a =  sorted(a)
 
 
 ans = INT_MAX
-j = n
-for i in range(1,n+1):
+j = n -1
+for i in range(n):
     if i < j :
         ans = min(ans,abs(a[i]+a[j]))
     while i < j -1 and a[i] + a[j] > 0:
