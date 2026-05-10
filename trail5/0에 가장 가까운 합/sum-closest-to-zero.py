@@ -1,14 +1,14 @@
 import sys
 n = int(input())
-a = [0] + list(map(int, input().split()))
+a = list(map(int, input().split()))
 
 INT_MAX = sys.maxsize
-a =  sorted(a)
+a = [0] + sorted(a)
 
 
 ans = INT_MAX
-j = n -1
-for i in range(n):
+j = n
+for i in range(1,n+1):
     if i < j :
         ans = min(ans,abs(a[i]+a[j]))
     while i < j -1 and a[i] + a[j] > 0:
