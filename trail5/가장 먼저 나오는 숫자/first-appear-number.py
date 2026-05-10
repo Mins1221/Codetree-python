@@ -13,10 +13,11 @@ def lower_bound(i):
             right = mid -1
         else:
             left = mid +1
-    if arr[min_idx] == i:
-        return min_idx +1
-    else:
-        return -1
+    if arr[min_idx] != n:
+        if arr[min_idx] == i:
+            return min_idx +1
+        else:
+            return -1
 
 for i in query:
     ans = lower_bound(i) 
