@@ -1,32 +1,30 @@
-n, m = tuple(map(int, input().split()))
-arr = list(map(int, input().split()))
-def upper_bound(target):
-    left, right = 0, n - 1
-    min_idx = n
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] > target:
-            right = mid - 1
-            min_idx = min(min_idx, mid)
+n, m = map(int, input().split())
+points = list(map(int, input().split()))
+segments = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Please write your code here.
+points.sort()
+def lower_bound(q):
+    l, r = 0, n-1
+    while l<=r:
+        mid = (l+r)//2
+        if q <= points[mid]:
+            r = mid-1
         else:
-            left = mid + 1
+            l = mid+1
+    return l
 
-    return min_idx
-
-def lower_bound(target):
-    left, right = 0, n - 1
-    min_idx = n
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] >= target:
-            right = mid - 1
-            min_idx = min(min_idx, mid)
+def upper_bound(q):
+    l, r = 0, n-1
+    while l<=r:
+        mid = (l+r)//2
+        if q < points[mid]:
+            r = mid-1
         else:
-            left = mid + 1
+            l = mid+1
+    return r
 
-    return min_idx
-arr.sort()
-for _ in range(m):
-    a, b = tuple(map(int, input().split()))
-    count = upper_bound(b) - lower_bound(a)
-    print(count)
+for x, y in segments:
+    left = lower_bound(x)
+    right = upper_bound(y)
+    print(right-left+1)
