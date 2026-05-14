@@ -1,38 +1,28 @@
-import sys
-input = sys.stdin.readline
+n, m = map(int, input().split())
+segments = [tuple(map(int, input().split())) for _ in range(m)]
+segments.sort()
+# Please write your code here.
+def calc_how_many(dist):
+    cnt=0
+    left=-dist
+    for start, end in segments:
+        left=max(left+dist, start)
+        if left<=end:
+            cnt+=(end-left)//dist
+            cnt+=1
+        left+=(end-left)//dist*dist
+    return cnt
 
-def solve():
-    N, M = map(int, input().split())  # ← N(점 개수), M(선분 개수) 순서!
-    segments = []
-    for _ in range(M):
-        l, r = map(int, input().split())
-        segments.append((l, r))
-    segments.sort()
+left=1
+right=10**18+1
+max_idx=0
 
-    def can_place(d):
-        count = 0
-        last = -10**18
-        for l, r in segments:
-            pos = max(l, last + d)
-            if pos > r:
-                continue
-            pts = (r - pos) // d + 1
-            count += pts
-            last = pos + (pts - 1) * d
-            if count >= N:
-                return True
-        return count >= N
+while left<=right:
+    mid=(left+right)//2
+    if calc_how_many(mid)>=n:
+        max_idx=max(max_idx, mid)
+        left=mid+1
+    else:
+        right=mid-1
+print(max_idx)
 
-    lo, hi = 1, 2 * 10**9
-    ans = 0
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        if can_place(mid):
-            ans = mid
-            lo = mid + 1
-        else:
-            hi = mid - 1
-
-    print(ans)  # 출력: 2
-
-solve()
