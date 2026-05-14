@@ -2,9 +2,9 @@ import sys
 INT_MIN = -sys.maxsize
 n, m = map(int, input().split())
 arr = [int(input()) for _ in range(n)]
-max_sum = 0
+max_sum = INT_MIN
 def is_possible(k):
-    max_sum = 0
+    max_sum = INT_MIN
     for elem in arr:
         result =elem // k 
         max_sum += result
