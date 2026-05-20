@@ -1,15 +1,23 @@
 n = int(input())
 arr = list(map(int, input().split()))
 
-ans = 0
-for i in range(1, n):
-    if arr[i - 1] == 0:
-        ans += 1
-        arr[i - 1] = 1
-        arr[i] ^= 1
-        if i + 1 < n:
-            arr[i + 1] ^= 1
-if arr[n - 1] == 0:
-    ans = -1
+# Please write your code here.
 
-print(ans)
+ans = 0
+for i in range(1,n):
+    if i == n-1 and arr[i-1] == 0:
+        arr[i-1] = 1
+        arr[i] = 1^arr[i]
+        ans+=1
+        break
+    if arr[i-1] == 0:
+        arr[i-1] = 1
+        arr[i] = 1^arr[i]
+        arr[i+1] = 1^arr[i+1]
+        ans+=1
+
+
+if 0 in arr:
+    print(-1)
+else:
+    print(ans)
