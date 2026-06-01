@@ -10,12 +10,12 @@ for i in range(1, m + 1):
     graph[x][y] = z
 dist[1] = 0
 for i in range(1, n + 1):
-    min_index = INT_MAX
+    min_index = -1
     for j in range(1, n + 1):
         if visited[j]:
             continue
         
-        if min_index == INT_MAX or dist[min_index] > dist[j]:
+        if min_index == -1 or dist[min_index] > dist[j]:
             min_index = j
     visited[min_index] = True
     for j in range(1, n + 1):
@@ -24,6 +24,8 @@ for i in range(1, n + 1):
 
         dist[j] = min(dist[j], dist[min_index] + graph[min_index][j])
 
+if dist[i] == INT_MAX:
+    dist[i] = -1
 for i in range(2, n + 1):
     print(dist[i])
 
