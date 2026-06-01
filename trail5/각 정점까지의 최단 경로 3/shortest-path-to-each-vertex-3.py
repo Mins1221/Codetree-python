@@ -23,8 +23,8 @@ for i in range(1, n + 1):
             continue
     
         dist[j] = min(dist[j], dist[min_index] + graph[min_index][j])
-    if dist[j] == INT_MAX:
-        dist[j] = -1
+if dist[j] == INT_MAX:
+    dist[j] = -1
 for i in range(2, n + 1):
     print(dist[i])
 
