@@ -8,6 +8,5 @@ for i in range(1,n+1):
         count[arr[j+1]] += 1
         j+=1
         ans = max(ans,j-i+1)
-
-    count[arr[i]] -= 1
+        count[arr[i]] -= 1
 print(ans)
