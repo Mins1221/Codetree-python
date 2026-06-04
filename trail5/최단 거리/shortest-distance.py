@@ -12,3 +12,4 @@ for k in range(n):
 for _ in range(m):
     x, y = tuple(map(int, input().split()))
     print(dist[x - 1][y - 1])
+
