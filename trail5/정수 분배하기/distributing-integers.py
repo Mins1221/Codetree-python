@@ -1,6 +1,7 @@
 n,m = map(int,input().split())
 arr = [int(input()) for _ in range(n)]
-l = 0
+l = 1
+
 r = max(arr)
 ans = 0
 while l <= r:
