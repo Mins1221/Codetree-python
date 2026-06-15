@@ -11,7 +11,10 @@ a = [0] * (n + 1)
 for i in range(1, n + 1):
     a[i] = int(input())
 k = int(input())
-dp = [[[0, 0] for _ in range(k + 1)] for _ in range(n + 1)]
+dp = [
+    [[0, 0] for _ in range(k + 1)]
+    for _ in range(n + 1)
+]
 ans = 0
 def dfs(x):
     dp[x][1][1] = a[x]
@@ -29,8 +32,8 @@ def dfs(x):
                 dp[x][i][0] = max(dp[x][i][0], 
                                   dp[x][i - j][0] + 
                                   max(dp[y][j][0], dp[y][j][1]))
+visited[1] = True
 dfs(1)
-
 for i in range(1, k + 1):
     ans = max(ans, dp[1][i][0])
     ans = max(ans, dp[1][i][1])
