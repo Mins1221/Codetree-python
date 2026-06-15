@@ -21,3 +21,4 @@ dfs(r)
 for _ in range(q):
     x = int(input())
     print(size[x])
+
