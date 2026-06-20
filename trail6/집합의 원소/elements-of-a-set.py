@@ -24,5 +24,5 @@ for _ in range(m):
         if find(a) == find(b):
             print(1)
         else:
-            pri
+            print(0)
 
