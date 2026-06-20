@@ -1,6 +1,6 @@
 n = int(input())
 intervals = [map(int,input().split()) for _ in range(n)]
-N = 9000000
+N = 2000000
 point= [0] * N
 for x1,x2 in intervals:
     point[x1] +=1
