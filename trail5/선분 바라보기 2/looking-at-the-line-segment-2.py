@@ -1,8 +1,9 @@
 from sortedcontainers import SortedSet
-n = int(input())
+n= int(input())
 segments = [tuple(map(int,input().split())) for _ in range(n)]
-points= []
-visible = [False] * (n+1)
+visible = [False] * n
+points=[]
+
 for i in range(n):
     y,x1,x2 = segments[i]
     points.append((x1,+1,i,y))
@@ -20,6 +21,6 @@ for _,v,index,y in points:
     visible[target_index] = True
 count = 0
 for i in range(n):
-    if visible[i]:
+    if visible[i] :
         count +=1
 print(count)
