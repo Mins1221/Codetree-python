@@ -1,13 +1,14 @@
 n = int(input())
 intervals = [map(int,input().split()) for _ in range(n)]
-points =[]
+points= []
 for i,(x1,x2) in enumerate(intervals):
     points.append((x1,+1,i))
     points.append((x2,-1,i))
 
+segs =set()
+ans = 0
 points.sort()
-segs= set()
-ans =0
+
 for x,v,index in points:
     if v == +1:
         if not segs:
@@ -15,4 +16,5 @@ for x,v,index in points:
         segs.add(index)
     else:
         segs.remove(index)
+
 print(ans)
