@@ -1,17 +1,15 @@
 n = int(input())
-intervals = [tuple(map(int,input().split())) for _ in range(n)]
-N = 1000000
-points= [0] * N
+intervals = [map(int,input().split()) for _ in range(n)]
+points= []
 for x1,x2 in intervals:
-    points[x1] +=1
-    points[x2] -=1
+    points.append((x1,+1))
+    points.append((x2,-1))
 
-
+points.sort()
+sum_val = 0
 count = 0
-max_val = 0
 
-for x in range(1,N):
-    max_val += points[x]
-    count = max(count,max_val)
-
+for x,v in points:
+    sum_val += v
+    count = max(count,sum_val)
 print(count)
