@@ -1,20 +1,18 @@
-n, s = map(int, input().split())
-arr = list(map(int, input().split()))
 import sys
+n,s = map(int,input().split())
+arr = list(map(int,input().split()))
+j =0
 INT_MAX = sys.maxsize
-j = 0
-ans = INT_MAX
 sum_val = arr[0]
+ans = INT_MAX
 for i in range(n):
-    while j +1 < n and sum_val < s:
+    while j+1 < n and sum_val < s:
         sum_val += arr[j+1]
         j +=1
-    if sum_val >= s:
+    if sum_val >=s:
         ans = min(ans,j-i+1)
-
     sum_val -= arr[i]
 
-if ans ==INT_MAX:
+if ans == INT_MAX:
     ans = -1
-
 print(ans)
