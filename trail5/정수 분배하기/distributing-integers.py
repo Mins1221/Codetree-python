@@ -1,15 +1,16 @@
-n, m = map(int, input().split())
+n,m = map(int,input().split())
 arr = [int(input()) for _ in range(n)]
 l = 1
 r = max(arr)
-ans = 0
+ans =0
 while l <= r:
-    mid = (l+r) //2
+    mid = (r+l) //2
     count = sum(x//mid for x in arr)
 
     if count >= m:
-        ans = mid
+        ans =mid
         l = mid +1
     else:
         r = mid -1
+
 print(ans)
