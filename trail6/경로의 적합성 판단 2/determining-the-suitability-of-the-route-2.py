@@ -10,11 +10,11 @@ def find(x):
 def union(x,y):
     X,Y = find(x), find(y)
     uf[X] = Y
-is_pos =True
-path = [0] + list(map(int,input().split()))
 for _ in range(m):
     a,b = tuple(map(int,input().split()))
     union(a,b)
+is_pos =True
+path = [0] + list(map(int,input().split()))
 if is_pos:
     print(1)
 else:
