@@ -1,25 +1,26 @@
-n, m = map(int, input().split())
-segments = [tuple(map(int, input().split())) for _ in range(m)]
-MAX_MUM = 10**18 +1
+n,m = map(int,input().split())
+segment = [tuple(map(int,input().split())) for _ in range(m)]
+MAM_MUM = 10**18 +1
 def calc(dist):
-    left = -MAX_MUM
+    left = -MAM_MUM
     cnt = 0
-    for s,e in segments:
+    for s,e in segment:
         while left + dist <= e:
+            left = max(s,left+dist)
             cnt +=1
-            left = max(left+dist,s)
-            if cnt >= n:
-                break
+        if cnt >= n:
+            break
     return cnt >= n
-segments.sort()
-left = 1
-right = MAX_MUM
+segment.sort()
+left =1
+right = MAM_MUM
 ans = 0
 while left <= right:
-    mid = (left + right) //2
+    mid = (left+right) //2
     if calc(mid):
         left = mid +1
-        ans =mid
+        ans = mid
     else:
-        right = mid -1
+        right = mid-1
+
 print(ans)
