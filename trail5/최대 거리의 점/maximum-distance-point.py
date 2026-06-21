@@ -1,32 +1,24 @@
 import sys
-n, m = map(int, input().split())
-points = [int(input()) for _ in range(n)]
 input = sys.stdin.readline
-
-def can_place(points,m,d):
+n,m = map(int,input().split())
+point = [int(input()) for _ in range(n)]
+def calc(point,m,d):
+    last = point[0]
     count = 1
-    last = points[0]
-    for p in points[1:]:
+    for p in point[1:]:
         if p - last >= d:
-            count +=1
             last = p
+            count +=1
             if count >= m:
                 return True
     return False
-
-points.sort()
-
-low,high = 1,points[-1] - points[0]
+low,high = 1, point[-1] - point[0]
 ans = 0
-
-while low <= high:
-    mid = (low+high) //2
-    if can_place(points,m,mid):
+while low <= high :
+    mid = (low + high) // 2
+    if calc(point,m,mid):
         ans =mid
         low = mid +1
-
     else:
         high = mid -1
-
 print(ans)
-
