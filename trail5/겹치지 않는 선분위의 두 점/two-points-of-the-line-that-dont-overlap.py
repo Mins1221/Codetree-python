@@ -1,28 +1,30 @@
+import sys
+input = sys.stdin.readline
 n, m = map(int, input().split())
-segments = [tuple(map(int, input().split())) for _ in range(m)]
-segments.sort()
-# Please write your code here.
-def calc_how_many(dist):
-    cnt=0
-    left=-dist
-    for start, end in segments:
-        left=max(left+dist, start)
-        if left<=end:
-            cnt+=(end-left)//dist
-            cnt+=1
-        left+=(end-left)//dist*dist
-    return cnt
+point = []
+for _ in range(m):
+    a, b = map(int, input().split())
+    point.extend(range(a, b + 1))   # 선분 위 정수점을 후보로
 
-left=1
-right=10**18+1
-max_idx=0
+def calc(point, k, d):              # k: 놓을 점의 개수 목표
+    last = point[0]
+    count = 1
+    for p in point[1:]:
+        if p - last >= d:
+            count += 1
+            last = p
+            if count >= k:
+                return True
+    return False
 
-while left<=right:
-    mid=(left+right)//2
-    if calc_how_many(mid)>=n:
-        max_idx=max(max_idx, mid)
-        left=mid+1
+point.sort()
+low, high = 1, point[-1] - point[0]
+ans = 0
+while low <= high:
+    mid = (low + high) // 2
+    if calc(point, n, mid):         # ← m이 아니라 n!
+        ans = mid
+        low = mid + 1
     else:
-        right=mid-1
-print(max_idx)
-
+        high = mid - 1
+print(ans)
