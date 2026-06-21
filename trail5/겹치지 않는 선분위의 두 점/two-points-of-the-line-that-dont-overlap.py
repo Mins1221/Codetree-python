@@ -1,30 +1,29 @@
-import sys
-input = sys.stdin.readline
 n, m = map(int, input().split())
-seg = [tuple(map(int, input().split())) for _ in range(m)]
-seg.sort()
+segments = [tuple(map(int, input().split())) for _ in range(m)]
+segments.sort()
+# Please write your code here.
+def calc_how_many(dist):
+    cnt=0
+    left=-dist
+    for s, e in segments:
+        left=max(left+dist, s)
+        if left<=end:
+            cnt+=(e-left)//dist
+            cnt+=1
+        left+=(e-left)//dist*dist
+    return cnt
 
-def calc(seg, n, d):
-    count = 0
-    last = None
-    for s, e in seg:
-        pos = s if count == 0 else max(s, last + d)
-        if pos > e:
-            continue
-        k = (e - pos) // d + 1     
-        count += k
-        last = pos + (k - 1) * d   
-        if count >= n:
-            return True
-    return count >= n
+left=1
+right=10**18+1
+ans=0
 
-low, high = 1, seg[-1][1] - seg[0][0]
-ans = 0
-while low <= high:
-    mid = (low + high) // 2
-    if calc(seg, n, mid):
-        ans = mid
-        low = mid + 1
+while left<=right:
+    mid=(left+right)//2
+    if calc_how_many(mid)>=n:
+        ans=max(ans, mid)
+        left=mid+1
     else:
-        high = mid - 1
+        right=mid-1
 print(ans)
+
+
