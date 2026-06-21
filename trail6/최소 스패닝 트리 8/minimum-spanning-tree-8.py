@@ -1,36 +1,31 @@
+import heapq
 import sys
-INT_MAX = sys.maxsize
-n, m = map(int, input().split())
-graph= [
-    [0]*(n+1)  
-    for _ in range(n+1)
-    ]
-visited = [False] * (n+1)
+input = sys.stdin.readline
 
-dist = [INT_MAX] * (n+1)
+def prim():
+    n, m = map(int, input().split())
+    graph = [[] for _ in range(n + 1)]
+    for _ in range(m):
+        u, v, w = map(int, input().split())
+        graph[u].append((w, v))   # (가중치, 도착정점)
+        graph[v].append((w, u))   # 무방향이므로 양쪽 다
 
-for _ in range(m):
-    x,y,z = tuple(map(int,input().split()))
-    graph[x][y] = z if graph[x][y] == 0 else min(graph[x][y],z)
-    graph[y][x] = z if graph[y][x] == 0 else min(graph[y][x],z)
+    visited = [False] * (n + 1)
+    heap = [(0, 1)]               # (간선 가중치, 시작 정점) — 1번부터 시작
+    total = 0
+    count = 0
 
-dist[1] = 0
-ans = 0
-for i in range(1,n+1):
-    min_index = -1
-    for j in range(1,n+1):
-        if visited[j] :
+    while heap and count < n:
+        w, node = heapq.heappop(heap)
+        if visited[node]:          # 이미 트리에 들어온 정점이면 스킵
             continue
-        if min_index == -1 or dist[min_index] > dist[j]:
-            min_index = j
-    visited[min_index] = True
+        visited[node] = True
+        total += w
+        count += 1
+        for nw, nxt in graph[node]:
+            if not visited[nxt]:
+                heapq.heappush(heap, (nw, nxt))
 
-    ans += dist[min_index]
+    return total
 
-    for j in range(1,n+1):
-        if graph[min_index][j] == 0:
-            continue
-        dist[j] = min(dist[j] , graph[min_index][j])
-
-print(ans)
-
+print(prim())
