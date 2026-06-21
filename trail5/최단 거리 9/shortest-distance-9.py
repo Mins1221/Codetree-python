@@ -1,50 +1,36 @@
 import sys
-INT_MAX = sys.maxsize
-n, m = tuple(map(int, input().split()))
-graph = [
-    [0] * (n + 1)
-    for _ in range(n + 1)
-]
-visited = [False] * (n + 1)
-
-dist = [INT_MAX] * (n + 1) 
-
-path = [0] * (n + 1)
-
-for _ in range(m):
-    x, y, z = tuple(map(int, input().split()))
-    graph[x][y] = z
-    graph[y][x] = z
-
-a, b = tuple(map(int, input().split()))
-dist[a] = 0
-
-# O(|V|^2) 다익스트라 코드
-for i in range(1, n + 1):
-    min_index = -1
-    for j in range(1, n + 1):
-        if visited[j]:
-            continue
-        
-        if min_index == -1 or dist[min_index] > dist[j]:
-            min_index = j
-    visited[min_index] = True
-    for j in range(1, n + 1):
-        if graph[min_index][j] == 0:
-            continue
-
-        if dist[j] > dist[min_index] + graph[min_index][j]:
-            dist[j] = dist[min_index] + graph[min_index][j]
-            path[j] = min_index
-
-print(dist[b])
-x = b
-vertices = []
-vertices.append(x)
-
-while x != a:
-    x = path[x]
-    vertices.append(x)
-for num in vertices[::-1]:
-    print(num, end=" ")
-
+import heapq
+input = sys.stdin.readline
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+for _ in range(M):
+    a, b, weight = map(int, input().split())
+    graph[a].append((b, weight))
+    graph[b].append((a, weight))
+A, B = map(int, input().split())
+INF = int(1e18)
+dist = [INF] * (N + 1)
+parent = [-1] * (N + 1)
+dist[A] = 0
+pq = []
+heapq.heappush(pq, (0, A))  
+while pq:
+    current_dist, current_node = heapq.heappop(pq)
+    if current_dist > dist[current_node]:
+        continue
+    for next_node, weight in graph[current_node]:
+        next_dist = current_dist + weight
+        if next_dist < dist[next_node]:
+            dist[next_node] = next_dist
+            parent[next_node] = current_node
+            heapq.heappush(pq, (next_dist, next_node))
+print(dist[B])
+path = []
+cur = B
+while cur != -1:
+    path.append(cur)
+    if cur == A:
+        break
+    cur = parent[cur]
+path.reverse()
+print(*path)
