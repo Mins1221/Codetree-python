@@ -11,6 +11,7 @@ def calc(dist):
             if cnt >= n:
                 break
     return cnt >= n
+segments.sort()
 left = 1
 right = MAX_MUM
 ans = 0
