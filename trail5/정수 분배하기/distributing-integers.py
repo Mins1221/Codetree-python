@@ -1,7 +1,7 @@
 n,m = map(int,input().split())
 arr = [int(input()) for _ in range(n)]
 l =1
-r =n
+r = max(arr)
 ans =0
 while l <= r:
     mid = (l+r) // 2
