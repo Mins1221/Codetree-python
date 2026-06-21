@@ -1,26 +1,27 @@
-import heapq
 import sys
-INT_MAX = sys.maxsize
-n, m = tuple(map(int, input().split()))
-graph = [[] for _ in range(n + 1)]
+import heapq
+input = sys.stdin.readline
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+for _ in range(M):
+    a, b, d = map(int, input().split())
+    graph[b].append((a, d))
+INF = int(1e18)
+dist = [INF] * (N + 1)
+school = N
+dist[school] = 0
 pq = []
-dist = [INT_MAX] * (n + 1)
-for _ in range(m):
-    x, y, z = tuple(map(int, input().split()))
-    graph[y].append((x, z))
-dist[n] = 0
-heapq.heappush(pq, (0, n))
+heapq.heappush(pq, (0, school)) 
 while pq:
-    min_dist, min_index = heapq.heappop(pq)
-    if min_dist != dist[min_index]:
+    current_dist, current_node = heapq.heappop(pq)
+    if current_dist > dist[current_node]:
         continue
-    for target_index, target_dist in graph[min_index]:
-        new_dist = dist[min_index] + target_dist
-        if dist[target_index] > new_dist:
-            dist[target_index] = new_dist
-            heapq.heappush(pq, (new_dist, target_index))
-ans = 0
-for i in range(1, n):
-    ans = max(ans, dist[i])
-
-print(ans)
+    for next_node, weight in graph[current_node]:
+        next_dist = current_dist + weight
+        if next_dist < dist[next_node]:
+            dist[next_node] = next_dist
+            heapq.heappush(pq, (next_dist, next_node))
+answer = 0
+for i in range(1, N):
+    answer = max(answer, dist[i])
+print(answer)
