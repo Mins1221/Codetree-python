@@ -1,18 +1,18 @@
 from collections import deque
 n,m = map(int,input().split())
-indegree = [0]*(n+1)
 edges = [[] for _ in range(n+1)]
+indegree = [0]*(n+1)
 q = deque()
-for i in range(m):
-    x,y = map(int,input().split())
+for _ in range(m):
+    x,y =map(int,input().split())
     edges[x].append(y)
     indegree[y] +=1
 for i in range(1,n+1):
     if not indegree[i]:
         q.append(i)
 while q:
-    x=q.popleft()
-    print(x, end=" ")
+    x = q.popleft()
+    print(x, end =" ")
     for y in edges[x]:
         indegree[y] -=1
         if not indegree[y]:
