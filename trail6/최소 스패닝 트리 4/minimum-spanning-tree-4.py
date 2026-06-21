@@ -22,8 +22,8 @@ for x,y,cost in edges:
         union(x,y)
 is_all_connected = True
 for i in range(2,n+1):
-    x = find(x)
-    y = find(y)
+    x = find(1)
+    y = find(i)
     if x!=y:
         is_all_connected = False
 if is_all_connected :
