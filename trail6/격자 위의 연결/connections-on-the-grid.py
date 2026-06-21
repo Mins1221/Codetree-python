@@ -1,11 +1,11 @@
 n,m = map(int,input().split())
-uf = [0] *(n*m+1)
-edges= []
+uf =[0]* (n*m+1)
+edges = []
 for i in range(1,n+1):
     cost = list(map(int,input().split()))
     for j in range(1,m):
         x = (i-1)*m+j
-        y = (i-1)*m+j+1
+        y =(i-1)*m+j+1
         edges.append((cost[j-1],x,y))
 for i in range(1,n):
     cost = list(map(int,input().split()))
@@ -13,24 +13,20 @@ for i in range(1,n):
         x = (i-1)*m+j
         y = i*m+j
         edges.append((cost[j-1],x,y))
+ans =0
+for i in range(1,n*m+1):
+    uf[i] = i
 def find(x):
     if uf[x] == x:
         return x
     uf[x] = find(uf[x])
     return uf[x]
-
 def union(x,y):
-    X,Y = find(x), find(y)
-    uf[X] = Y
-
+    X,Y = find(x),find(y)
+    uf[X] =Y
 edges.sort()
-for i in range(1,n*m+1):
-    uf[i] = i
-
-ans = 0
 for cost,x,y in edges:
     if find(x) != find(y):
         ans += cost
         union(x,y)
-
-print(ans) 
+print(ans)
