@@ -1,40 +1,41 @@
 import sys
-INT_MAX = sys.maxsize
-n, m = tuple(map(int, input().split()))
-graph = [[0] * (n + 1)for _ in range(n + 1)]
-visited = [False] * (n + 1)
-dist = [INT_MAX] * (n + 1)
-for _ in range(m):
-    x, y, z = tuple(map(int, input().split()))
-    graph[x][y] = z
-    graph[y][x] = z
-a, b = tuple(map(int, input().split()))
-dist[b] = 0
-for i in range(1, n + 1):
-    min_index = -1
-    for j in range(1, n + 1):
-        if visited[j]:
+import heapq
+input = sys.stdin.readline
+INF = 10**18
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+for _ in range(M):
+    u, v, w = map(int, input().split())
+    graph[u].append((v, w))
+    graph[v].append((u, w))
+A, B = map(int, input().split())
+def dijkstra(start):
+    dist = [INF] * (N + 1)
+    pq = []
+    dist[start] = 0
+    heapq.heappush(pq, (0, start))
+    while pq:
+        cur_dist, cur = heapq.heappop(pq)
+        if cur_dist > dist[cur]:
             continue
-        
-        if min_index == -1 or dist[min_index] > dist[j]:
-            min_index = j
-
-    visited[min_index] = True
-    for j in range(1, n + 1):
-        if graph[min_index][j] == 0:
-            continue
-
-        if dist[j] > dist[min_index] + graph[min_index][j]:
-            dist[j] = dist[min_index] + graph[min_index][j]
-print(dist[a])
-x = a
-print(x, end=" ")
-while x != b:
-    for i in range(1, n + 1):
-        if graph[i][x] == 0:
-            continue
-        if dist[i] + graph[i][x] == dist[x]:
-            x = i
+        for nxt, cost in graph[cur]:
+            new_dist = cur_dist + cost
+            if new_dist < dist[nxt]:
+                dist[nxt] = new_dist
+                heapq.heappush(pq, (new_dist, nxt))
+    return dist
+dist_from_A = dijkstra(A)
+dist_from_B = dijkstra(B)
+shortest = dist_from_A[B]
+for i in range(1, N + 1):
+    graph[i].sort()
+path = [A]
+cur = A
+while cur != B:
+    for nxt, cost in graph[cur]:
+        if dist_from_A[cur] + cost == dist_from_A[nxt] and dist_from_A[nxt] + dist_from_B[nxt] == shortest:
+            path.append(nxt)
+            cur = nxt
             break
-
-    print(x, end=" ")
+print(shortest)
+print(*path)
