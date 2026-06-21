@@ -6,7 +6,7 @@ def calc_how_many(dist):
     cnt=0
     left=-dist
     for s, e in segments:
-        left=max(0, s)
+        left=max(left+dist, s)
         if left<=e:
             cnt+=(e-left)//dist
             cnt+=1
