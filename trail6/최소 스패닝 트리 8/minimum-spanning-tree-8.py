@@ -1,31 +1,23 @@
-import heapq
 import sys
+import heapq
 input = sys.stdin.readline
-
-def prim():
-    n, m = map(int, input().split())
-    graph = [[] for _ in range(n + 1)]
-    for _ in range(m):
-        u, v, w = map(int, input().split())
-        graph[u].append((w, v))   # (가중치, 도착정점)
-        graph[v].append((w, u))   # 무방향이므로 양쪽 다
-
-    visited = [False] * (n + 1)
-    heap = [(0, 1)]               # (간선 가중치, 시작 정점) — 1번부터 시작
-    total = 0
-    count = 0
-
-    while heap and count < n:
-        w, node = heapq.heappop(heap)
-        if visited[node]:          # 이미 트리에 들어온 정점이면 스킵
-            continue
-        visited[node] = True
-        total += w
-        count += 1
-        for nw, nxt in graph[node]:
-            if not visited[nxt]:
-                heapq.heappush(heap, (nw, nxt))
-
-    return total
-
-print(prim())
+n, m = map(int, input().split())
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    a, b, w = map(int, input().split())
+    graph[a].append((w, b))
+    graph[b].append((w, a))
+visited = [False] * (n + 1)
+pq = []
+heapq.heappush(pq, (0, 1))  # (가중치, 시작정점)
+answer = 0
+while pq:
+    w, node = heapq.heappop(pq)
+    if visited[node]:
+        continue
+    visited[node] = True
+    answer += w
+    for next_w, next_node in graph[node]:
+        if not visited[next_node]:
+            heapq.heappush(pq, (next_w, next_node))
+print(answer)
