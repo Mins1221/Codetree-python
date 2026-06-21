@@ -15,6 +15,9 @@ for _ in range(m):
     union(a,b)
 is_pos =True
 path = [0] + list(map(int,input().split()))
+for i in range(1,k):
+    if find(path[i]) != find(path[i-1]):
+        is_pos = False
 if is_pos:
     print(1)
 else:
