@@ -1,5 +1,5 @@
 n,m = map(int,input().split())
-uf = [0] *(n+1)
+uf = [0] * (n+1)
 sz = [0] *(n+1)
 for i in range(1,n+1):
     uf[i] = i
@@ -13,11 +13,11 @@ def union(x,y):
     X,Y = find(x),find(y)
     if X != Y:
         uf[X] = Y
-        sz[Y] += sz[X]
-for _ in range(m):
+        sz[Y] +=sz[X]
+for i in range(m):
     command = input()
     query = command[0]
-    if query == 'x':
+    if query =='x':
         a,b = tuple(map(int,command[2:].split()))
         union(a,b)
     else:
