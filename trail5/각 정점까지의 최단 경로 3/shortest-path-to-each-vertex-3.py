@@ -17,7 +17,6 @@ def dijkstra(start):
             continue
         for next_node, weight in graph[cur_node]:
             new_dist = cur_dist + weight
-
             if new_dist < dist[next_node]:
                 dist[next_node] = new_dist
                 heapq.heappush(pq, (new_dist, next_node))
