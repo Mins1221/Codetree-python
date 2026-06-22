@@ -1,5 +1,5 @@
-n,m,k = map(int,input().split())
-uf = [0] *(n+1)
+n,m,k = tuple(map(int,input().split()))
+uf = [0] * (n+1)
 for i in range(1,n+1):
     uf[i] = i
 def find(x):
@@ -10,11 +10,11 @@ def find(x):
 def union(x,y):
     X,Y = find(x),find(y)
     uf[X] = Y
-is_pos = True
 for _ in range(m):
-    a,b = tuple(map(int,input().split()))
+    a,b = map(int,input().split())
     union(a,b)
-path = [0] +list(map(int,input().split()))
+path = [0] + list(map(int,input().split()))
+is_pos = True
 for i in range(1,k):
     if find(path[i]) != find(path[i+1]):
         is_pos = False
