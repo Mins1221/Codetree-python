@@ -1,26 +1,24 @@
-import sys
-INT_MAX = sys.maxsize
-n, m = tuple(map(int, input().split()))
-graph = [[0] * (n + 1)for _ in range(n + 1)]
-visited = [False] * (n + 1)
-dist = [INT_MAX] * (n + 1) 
-for _ in range(m):
-    x, y, z = tuple(map(int, input().split()))
-    graph[x][y] = z
+import heapq
+n, m = map(int, input().split())
+edges = [tuple(map(int, input().split())) for _ in range(m)]
+INT_MAX = float('inf')
+graph = [[] for _ in range(n+1)]
+for u, v, w in edges:
+    graph[u].append((v,w)) 
+pq = []
+visited = [False]*(n+1)
+dist = [INT_MAX]*(n+1)
 dist[1] = 0
-for i in range(1, n + 1):
-    min_index = -1
-    for j in range(1, n + 1):
-        if visited[j]:
-            continue
-        if min_index == -1 or dist[min_index] > dist[j]:
-            min_index = j
-    visited[min_index] = True
-    for j in range(1, n + 1):
-        if graph[min_index][j] == 0:
-            continue
-        dist[j] = min(dist[j], dist[min_index] + graph[min_index][j])
-for i in range(2, n + 1):
+heapq.heappush(pq, (0, 1))
+while pq:
+    min_dist, index = heapq.heappop(pq)
+    if not visited[index]:
+        visited[index] = True
+        for v, w in graph[index]:
+            if min_dist + w < dist[v]:
+                dist[v] = min_dist + w
+                heapq.heappush(pq, (dist[v], v))
+for i in range(2, n+1):
     if dist[i] == INT_MAX:
         print(-1)
     else:
