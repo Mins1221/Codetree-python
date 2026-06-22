@@ -14,8 +14,8 @@ def union(x,y):
     uf[X] = Y
 ans =0
 edges.sort(key = lambda x:x[2])
-for a,b, cost in edges:
+for a,b,cost in edges:
     if find(a) != find(b):
-        ans +=cost
+        ans += cost
         union(a,b)
 print(ans)
